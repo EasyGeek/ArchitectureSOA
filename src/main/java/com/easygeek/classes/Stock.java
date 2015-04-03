@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 @Table(name = "stock", catalog = "easygeek")
 public class Stock implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer stockId;
 	private Date dateStock;
 	private Boolean reapprovisionnement;

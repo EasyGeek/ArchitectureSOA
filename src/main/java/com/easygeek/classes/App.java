@@ -14,7 +14,8 @@ import org.hibernate.Session;
 @Entity
 public class App 
 {
-    public static void main( String[] args )
+    @SuppressWarnings("unchecked")
+	public static void main( String[] args )
     {
         Session session = HibernateUtil.getSessionFactory()
         							   .openSession();
