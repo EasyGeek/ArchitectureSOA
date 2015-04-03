@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 @Table(name = "Commande", catalog = "easygeek")
 public class Commande implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer commandeId;
 	private Client client;
 	private Date dateCommande;

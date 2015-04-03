@@ -10,6 +10,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ComposantFournisseurId implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String reference;
 	private int fournisseurId;
 

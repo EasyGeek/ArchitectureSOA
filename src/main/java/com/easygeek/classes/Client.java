@@ -1,13 +1,15 @@
 package com.easygeek.classes;
 // Generated 3 avr. 2015 10:14:55 by Hibernate Tools 4.3.1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,6 +21,8 @@ import javax.persistence.Table;
 @Table(name = "client", catalog = "easygeek")
 public class Client implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer clientId;
 	private String nom;
 	private String prenom;

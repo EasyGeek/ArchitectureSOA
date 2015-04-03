@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "Composant", catalog = "easygeek")
 public class Composant implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String reference;
 	private String titre;
 	private String description;

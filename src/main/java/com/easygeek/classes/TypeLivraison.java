@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @Table(name = "Type_Livraison", catalog = "easygeek")
 public class TypeLivraison implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer typeLivraisonId;
 	private String libelle;
 	private Double prix;

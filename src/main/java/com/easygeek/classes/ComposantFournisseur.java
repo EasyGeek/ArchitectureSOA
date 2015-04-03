@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @Table(name = "Composant_Fournisseur", catalog = "easygeek")
 public class ComposantFournisseur implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private ComposantFournisseurId id;
 
 	public ComposantFournisseur() {

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @Table(name = "Ordinateur", catalog = "easygeek")
 public class Ordinateur implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private OrdinateurId id;
 	private Float quantite;
 
