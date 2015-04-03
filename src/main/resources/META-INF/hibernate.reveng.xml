@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="easygeek" match-name="Commande"/>
+  <table-filter match-catalog="easygeek" match-name="Composant"/>
+  <table-filter match-catalog="easygeek" match-name="Composant_Fournisseur"/>
+  <table-filter match-catalog="easygeek" match-name="Fournisseur"/>
+  <table-filter match-catalog="easygeek" match-name="Marque"/>
+  <table-filter match-catalog="easygeek" match-name="Ordinateur"/>
+  <table-filter match-catalog="easygeek" match-name="Type"/>
+  <table-filter match-catalog="easygeek" match-name="Type_Livraison"/>
+  <table-filter match-catalog="easygeek" match-name="client"/>
+  <table-filter match-catalog="easygeek" match-name="stock"/>
+</hibernate-reverse-engineering>
