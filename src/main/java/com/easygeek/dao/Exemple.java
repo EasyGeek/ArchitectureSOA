@@ -1,18 +1,16 @@
-package com.easygeek.classes;
+package com.easygeek.dao;
 
 
 import java.util.List;
 
-import javax.persistence.Entity;
-
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-/**
- * Hello world!
- *
- */
-@Entity
-public class App 
+import com.easygeek.classes.Client;
+import com.easygeek.classes.HibernateUtil;
+
+@Repository
+public class Exemple 
 {
     @SuppressWarnings("unchecked")
 	public static void main( String[] args )
