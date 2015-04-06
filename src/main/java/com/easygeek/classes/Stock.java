@@ -1,5 +1,5 @@
 package com.easygeek.classes;
-// Generated 3 avr. 2015 10:14:55 by Hibernate Tools 4.3.1
+// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,8 +18,6 @@ import javax.persistence.TemporalType;
 @Table(name = "stock", catalog = "easygeek")
 public class Stock implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private Integer stockId;
 	private Date dateStock;
 	private Boolean reapprovisionnement;
