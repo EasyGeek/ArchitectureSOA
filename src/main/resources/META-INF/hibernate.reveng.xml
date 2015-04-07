@@ -7,7 +7,7 @@
   <table-filter match-catalog="easygeek" match-name="Composant_Fournisseur"/>
   <table-filter match-catalog="easygeek" match-name="Fournisseur"/>
   <table-filter match-catalog="easygeek" match-name="Marque"/>
-  <table-filter match-catalog="easygeek" match-name="Ordinateur"/>
+  <table-filter match-catalog="easygeek" match-name="Details_Commande"/>
   <table-filter match-catalog="easygeek" match-name="Type"/>
   <table-filter match-catalog="easygeek" match-name="Type_Livraison"/>
   <table-filter match-catalog="easygeek" match-name="client"/>

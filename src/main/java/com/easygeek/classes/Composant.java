@@ -1,5 +1,5 @@
 package com.easygeek.classes;
-// Generated 3 avr. 2015 10:14:55 by Hibernate Tools 4.3.1
+// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +13,8 @@ import javax.persistence.Table;
 @Table(name = "Composant", catalog = "easygeek")
 public class Composant implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private String reference;
-	private String titre;
+	private String nom;
 	private String description;
 	private Double prixHt;
 	private Integer marqueId;
@@ -29,10 +27,10 @@ public class Composant implements java.io.Serializable {
 		this.reference = reference;
 	}
 
-	public Composant(String reference, String titre, String description,
+	public Composant(String reference, String nom, String description,
 			Double prixHt, Integer marqueId, Integer typeId) {
 		this.reference = reference;
-		this.titre = titre;
+		this.nom = nom;
 		this.description = description;
 		this.prixHt = prixHt;
 		this.marqueId = marqueId;
@@ -49,13 +47,13 @@ public class Composant implements java.io.Serializable {
 		this.reference = reference;
 	}
 
-	@Column(name = "titre")
-	public String getTitre() {
-		return this.titre;
+	@Column(name = "nom")
+	public String getNom() {
+		return this.nom;
 	}
 
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	@Column(name = "Description", length = 65535)

@@ -1,5 +1,5 @@
 package com.easygeek.classes;
-// Generated 3 avr. 2015 10:14:55 by Hibernate Tools 4.3.1
+// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,19 +21,20 @@ import javax.persistence.TemporalType;
 @Table(name = "Commande", catalog = "easygeek")
 public class Commande implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private Integer commandeId;
 	private Client client;
 	private Date dateCommande;
+	private Double prixHt;
 	private Integer typeLivraisonId;
 
 	public Commande() {
 	}
 
-	public Commande(Client client, Date dateCommande, Integer typeLivraisonId) {
+	public Commande(Client client, Date dateCommande, Double prixHt,
+			Integer typeLivraisonId) {
 		this.client = client;
 		this.dateCommande = dateCommande;
+		this.prixHt = prixHt;
 		this.typeLivraisonId = typeLivraisonId;
 	}
 
@@ -66,6 +67,15 @@ public class Commande implements java.io.Serializable {
 
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
+	}
+
+	@Column(name = "prixHT", precision = 22, scale = 0)
+	public Double getPrixHt() {
+		return this.prixHt;
+	}
+
+	public void setPrixHt(Double prixHt) {
+		this.prixHt = prixHt;
 	}
 
 	@Column(name = "TypeLivraison_id")

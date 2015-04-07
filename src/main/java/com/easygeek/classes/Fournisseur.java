@@ -1,5 +1,5 @@
 package com.easygeek.classes;
-// Generated 3 avr. 2015 10:14:55 by Hibernate Tools 4.3.1
+// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +15,6 @@ import javax.persistence.Table;
 @Table(name = "Fournisseur", catalog = "easygeek")
 public class Fournisseur implements java.io.Serializable {
 
-	private static final long serialVersionUID = -6596559363666509279L;
-	
 	private Integer fournisseurId;
 	private String nom;
 	private String telephone;
