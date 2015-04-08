@@ -1,4 +1,4 @@
-package com.easygeek.classes;
+package com.easygeek.entite;
 // Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
@@ -19,6 +19,8 @@ import javax.persistence.Table;
 @Table(name = "Client", catalog = "easygeek")
 public class Client implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer clientId;
 	private String nom;
 	private String prenom;

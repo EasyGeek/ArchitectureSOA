@@ -1,4 +1,4 @@
-package com.easygeek.classes;
+package com.easygeek.entite;
 // Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @Table(name = "Details_commande", catalog = "easygeek")
 public class DetailsCommande implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private DetailsCommandeId id;
 	private Float quantite;
 

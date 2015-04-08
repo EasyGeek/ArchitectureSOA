@@ -1,4 +1,4 @@
-package com.easygeek.classes;
+package com.easygeek.entite;
 // Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "Composant", catalog = "easygeek")
 public class Composant implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String reference;
 	private String nom;
 	private String description;

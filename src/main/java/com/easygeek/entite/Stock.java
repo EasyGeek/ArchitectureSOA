@@ -1,4 +1,4 @@
-package com.easygeek.classes;
+package com.easygeek.entite;
 // Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
 import java.util.Date;
@@ -18,8 +18,10 @@ import javax.persistence.TemporalType;
 @Table(name = "stock", catalog = "easygeek")
 public class Stock implements java.io.Serializable {
 
-	private Integer stockId;
-	private Date dateStock;
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
+	private Date date;
 	private Boolean reapprovisionnement;
 	private Integer quantite;
 	private String reference;
@@ -33,7 +35,7 @@ public class Stock implements java.io.Serializable {
 
 	public Stock(Date dateStock, Boolean reapprovisionnement, Integer quantite,
 			String reference) {
-		this.dateStock = dateStock;
+		this.date = dateStock;
 		this.reapprovisionnement = reapprovisionnement;
 		this.quantite = quantite;
 		this.reference = reference;
@@ -43,21 +45,21 @@ public class Stock implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "stock_id", unique = true, nullable = false)
 	public Integer getStockId() {
-		return this.stockId;
+		return this.id;
 	}
 
 	public void setStockId(Integer stockId) {
-		this.stockId = stockId;
+		this.id = stockId;
 	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_stock", length = 10)
 	public Date getDateStock() {
-		return this.dateStock;
+		return this.date;
 	}
 
 	public void setDateStock(Date dateStock) {
-		this.dateStock = dateStock;
+		this.date = dateStock;
 	}
 
 	@Column(name = "reapprovisionnement")

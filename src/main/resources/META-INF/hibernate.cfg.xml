@@ -9,18 +9,18 @@
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="show_sql">true</property>
-  <!-- MAPPING DES CLASSES JAVA POUR CHAQUE TABLE EN BASE DE DONNEES -->
-  <mapping class="com.easygeek.classes.Client"/>
-  <mapping class="com.easygeek.classes.Commande"/>
-  <mapping class="com.easygeek.classes.Composant"/>
-  <mapping class="com.easygeek.classes.ComposantFournisseur"/>
-  <mapping class="com.easygeek.classes.ComposantFournisseurId"/>
-  <mapping class="com.easygeek.classes.Fournisseur"/>
-  <mapping class="com.easygeek.classes.Marque"/>
-  <mapping class="com.easygeek.classes.DetailsCommande"/>
-  <mapping class="com.easygeek.classes.DetailsCommandeId"/>
-  <mapping class="com.easygeek.classes.Stock"/>
-  <mapping class="com.easygeek.classes.Type"/>
-  <mapping class="com.easygeek.classes.TypeLivraison"/>
+  <!-- MAPPING DES entite JAVA POUR CHAQUE TABLE EN BASE DE DONNEES -->
+  <mapping class="com.easygeek.entite.Client"/>
+  <mapping class="com.easygeek.entite.Commande"/>
+  <mapping class="com.easygeek.entite.Composant"/>
+  <mapping class="com.easygeek.entite.ComposantFournisseur"/>
+  <mapping class="com.easygeek.entite.ComposantFournisseurId"/>
+  <mapping class="com.easygeek.entite.Fournisseur"/>
+  <mapping class="com.easygeek.entite.Marque"/>
+  <mapping class="com.easygeek.entite.DetailsCommande"/>
+  <mapping class="com.easygeek.entite.DetailsCommandeId"/>
+  <mapping class="com.easygeek.entite.Stock"/>
+  <mapping class="com.easygeek.entite.Type"/>
+  <mapping class="com.easygeek.entite.TypeLivraison"/>
  </session-factory>
 </hibernate-configuration>
