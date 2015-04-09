@@ -1,12 +1,17 @@
 package com.easygeek.entite;
 // Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,42 +29,40 @@ public class Stock implements java.io.Serializable {
 	private Date date;
 	private Boolean reapprovisionnement;
 	private Integer quantite;
-	private String reference;
+	private Composant composant;
 
 	public Stock() {
 	}
 
-	public Stock(String reference) {
-		this.reference = reference;
-	}
-
-	public Stock(Date dateStock, Boolean reapprovisionnement, Integer quantite,
-			String reference) {
-		this.date = dateStock;
+	public Stock(Integer id, Date date, Boolean reapprovisionnement,
+			Integer quantite, Composant composant) {
+		super();
+		this.id = id;
+		this.date = date;
 		this.reapprovisionnement = reapprovisionnement;
 		this.quantite = quantite;
-		this.reference = reference;
+		this.composant = composant;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "stock_id", unique = true, nullable = false)
-	public Integer getStockId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setStockId(Integer stockId) {
-		this.id = stockId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_stock", length = 10)
-	public Date getDateStock() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDateStock(Date dateStock) {
-		this.date = dateStock;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Column(name = "reapprovisionnement")
@@ -80,13 +83,15 @@ public class Stock implements java.io.Serializable {
 		this.quantite = quantite;
 	}
 
-	@Column(name = "reference", nullable = false)
-	public String getReference() {
-		return this.reference;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reference", nullable = false)
+	public Composant getComposant() {
+		return composant;
 	}
 
-	public void setReference(String reference) {
-		this.reference = reference;
+	public void setComposant(Composant composant) {
+		this.composant = composant;
 	}
+
 
 }
