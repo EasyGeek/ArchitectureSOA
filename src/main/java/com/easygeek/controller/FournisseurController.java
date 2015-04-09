@@ -15,8 +15,8 @@ public class FournisseurController {
 	public FournisseurService fournisseurService = new FournisseurService();
 	
 	@RequestMapping(value = "/fournisseurs", method = RequestMethod.GET)
-	public List<Fournisseur> clients() {
-		List<Fournisseur> clients = fournisseurService.getAll();
-		return clients;
+	public List<Fournisseur> fournisseurs() {
+		List<Fournisseur> fournisseurs = fournisseurService.getAll();
+		return fournisseurs;
 	}
 }
