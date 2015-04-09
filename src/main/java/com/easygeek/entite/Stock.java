@@ -7,11 +7,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,19 +26,19 @@ public class Stock implements java.io.Serializable {
 	private Date date;
 	private Boolean reapprovisionnement;
 	private Integer quantite;
-	private Composant composant;
+	private String reference;
 
 	public Stock() {
 	}
 
 	public Stock(Integer id, Date date, Boolean reapprovisionnement,
-			Integer quantite, Composant composant) {
+			Integer quantite, String reference) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.reapprovisionnement = reapprovisionnement;
 		this.quantite = quantite;
-		this.composant = composant;
+		this.reference = reference;
 	}
 
 	@Id
@@ -83,15 +80,13 @@ public class Stock implements java.io.Serializable {
 		this.quantite = quantite;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "reference", nullable = false)
-	public Composant getComposant() {
-		return composant;
+	@Column(name = "reference")
+	public String getReference() {
+		return reference;
 	}
 
-	public void setComposant(Composant composant) {
-		this.composant = composant;
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
-
 
 }

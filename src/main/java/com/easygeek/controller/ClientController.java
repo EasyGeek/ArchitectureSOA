@@ -16,7 +16,7 @@ public class ClientController {
 	
 	@RequestMapping(value = "/client", method = RequestMethod.GET)
 	public List<Client> clients() {
-		List<Client> clients = clientService.getAll();
+			List<Client> clients = clientService.getAll();
 		return clients;
 	}
 }
