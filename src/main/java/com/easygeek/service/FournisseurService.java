@@ -18,14 +18,5 @@ public class FournisseurService extends CoreService<Fournisseur>{
 	public FournisseurService() {
 		super(Fournisseur.class);
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<Fournisseur> getAll() {
-		return session.createCriteria(Fournisseur.class).list();
-	}
-	
-	public Fournisseur get(Integer id) {
-		return (Fournisseur) session.createCriteria(Fournisseur.class).add(Restrictions.eq("id", id)).uniqueResult();
-	}
 	
 }
