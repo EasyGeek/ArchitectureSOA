@@ -61,19 +61,49 @@ public abstract class CoreService<T> {
 	}
 
 	public Serializable save(T obj) {
-		return session.save(obj);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        try { 
+        	session.save(obj);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        
+        session.getTransaction().commit();
+		return (Serializable) obj;
 	}
-
-	public void update(T obj) {
-		session.update(obj);
+	
+	public Serializable update(T obj) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        try { 
+        	session.save(obj);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        
+        session.getTransaction().commit();
+		return (Serializable) obj;
+	}
+	
+	public Serializable delete(T obj) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        try { 
+        	session.delete(obj);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        
+        session.getTransaction().commit();
+		return (Serializable) obj;
 	}
 
 	public void saveOrUpdate(T obj) {
 		session.saveOrUpdate(obj);
-	}
-
-	public void delete(T obj) {
-		session.delete(obj);
 	}
 
 	public void flushSession() {

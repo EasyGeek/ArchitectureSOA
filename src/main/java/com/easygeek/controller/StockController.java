@@ -1,5 +1,6 @@
 package com.easygeek.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,11 +36,17 @@ public class StockController {
 	}
 
 	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/stock/ajouter ***/
-	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
-	public String ajoutStock(@ModelAttribute Stock stock) {
+	   http://localhost:8080/stock/ajouter/quantite/reappro/reference ***/
+	@RequestMapping(value = "/ajouter/{quantite}/{reapprovisionnement}/{reference}", method = RequestMethod.GET)
+	public String ajoutStock(@PathVariable Integer quantite, @PathVariable Boolean reapprovisionnement, @PathVariable String reference) {
 		String message = "Ajout effectué avec succés !";
-
+		
+		Stock stock = new Stock();
+		stock.setQuantite(quantite);
+		stock.setDate(new Date());
+		stock.setReapprovisionnement(reapprovisionnement);
+		stock.setReference(reference);
+		
 		try {
 			stockService.save(stock);
 			System.out.println("Ajout d'un stock avec l'id :" + stock.getId());
