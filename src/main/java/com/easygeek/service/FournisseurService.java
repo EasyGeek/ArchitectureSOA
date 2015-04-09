@@ -22,4 +22,12 @@ public class FournisseurService extends CoreService<Fournisseur>{
 		return session.createCriteria(Fournisseur.class).list();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Integer addFournisseur(Fournisseur f) {
+		session.beginTransaction();
+		session.save(f);
+		session.getTransaction().commit();
+		return f.getFournisseurId();
+	}
+	
 }
