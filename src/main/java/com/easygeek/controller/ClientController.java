@@ -2,7 +2,7 @@ package com.easygeek.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,20 +22,10 @@ public class ClientController {
 		return clients;
 	}
 	
-	/** Méthode ignoblement dégueulasse mais fonctionnelle **/
-	@RequestMapping(value = "ajouter/{nom}/{prenom}/{adresse}/{codePostal}/{ville}/{telephone}/{password}/{email}", method = RequestMethod.GET)
-	public String ajoutClient(@PathVariable String nom, @PathVariable String prenom, @PathVariable String adresse,@PathVariable String codePostal,@PathVariable String ville,@PathVariable String telephone,@PathVariable String password, @PathVariable String email) {
-		String message = "Ajout effectué avec succés !";
+	@RequestMapping(value = "ajouter", method = RequestMethod.GET)
+	public String ajoutClient(@ModelAttribute("client") Client client) {
 		
-		Client client = new Client();
-		client.setNom(nom);
-		client.setPrenom(prenom);
-		client.setAdresse(adresse);
-		client.setCodePostal(codePostal);
-		client.setVille(ville);
-		client.setTelephone(telephone);
-		client.setEmail(email);
-		client.setPassword(password);
+	String message = "Ajout effectué avec succés !";
 		
 		try {
 			clientService.save(client);

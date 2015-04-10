@@ -2,17 +2,13 @@ package com.easygeek.controller;
 
 import java.util.List;
 
-import org.hibernate.Transaction;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.easygeek.entite.Fournisseur;
-import com.easygeek.entite.Stock;
 import com.easygeek.service.FournisseurService;
 
 @RestController
@@ -33,7 +29,7 @@ public class FournisseurController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Fournisseur getFournisseur(@PathVariable Integer id) {
 		Fournisseur fournisseur = fournisseurService.get(id);
-		System.out.println("fournisseur effectué sur le stock id : " + id);
+		System.out.println("getFourniseur avec l'id : " + id);
 		return fournisseur;
 	}
 	

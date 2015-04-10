@@ -1,4 +1,4 @@
-package com.easygeek.service;
+package com.easygeek.dao;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -20,7 +20,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.easygeek.util.HibernateUtil;
 
-public abstract class CoreService<T> {
+public abstract class CoreDao<T> {
 
 	protected Session session;
 	protected Class<T> entityClass;
@@ -30,7 +30,7 @@ public abstract class CoreService<T> {
 		session.clear();
 	}
 
-	public CoreService(Class<T> entityClass) {
+	public CoreDao(Class<T> entityClass) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		this.entityClass = entityClass;
 	}

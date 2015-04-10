@@ -1,6 +1,5 @@
 package com.easygeek.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,22 +29,21 @@ public class StockController {
 	 au path variable :  http://localhost:8080/stock/id ***/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Stock getStock(@PathVariable Integer id) {
-		Stock stock = stockService.get(id);
-		System.out.println("getStock effectué sur le stock id : " + id);
+		Stock stock = new Stock();
+		if(id != null){
+			stock = stockService.get(id);
+			System.out.println("getStock effectué sur le stock id : " + id);
+		} else {
+			System.out.println("getStock avec un id null");
+		}
 		return stock;
 	}
 
 	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/stock/ajouter/quantite/reappro/reference ***/
-	@RequestMapping(value = "/ajouter/{quantite}/{reapprovisionnement}/{reference}", method = RequestMethod.GET)
-	public String ajoutStock(@PathVariable Integer quantite, @PathVariable Boolean reapprovisionnement, @PathVariable String reference) {
+	   http://localhost:8080/stock/ajouter ***/
+	@RequestMapping(value = "/ajouter", method = RequestMethod.GET)
+	public String ajoutStock(@ModelAttribute("stock") Stock stock) {
 		String message = "Ajout effectué avec succés !";
-		
-		Stock stock = new Stock();
-		stock.setQuantite(quantite);
-		stock.setDate(new Date());
-		stock.setReapprovisionnement(reapprovisionnement);
-		stock.setReference(reference);
 		
 		try {
 			stockService.save(stock);
@@ -64,8 +62,8 @@ public class StockController {
 
 	/*** Modifie un stock en passant l'objet en modelattribute par le formulaire 
 	   http://localhost:8080/stock/modifier ***/
-	@RequestMapping(value = "/modifier", method = RequestMethod.PUT)
-	public String modifierStock(@ModelAttribute Stock stock) {
+	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
+	public String modifierStock(@ModelAttribute("stock") Stock stock) {
 		String message = "Modification effectuée avec succés !";
 
 		try {
@@ -89,7 +87,7 @@ public class StockController {
 	/*** Supprime un stock en passant l'objet en modelattribute par le formulaire 
 	   http://localhost:8080/stock/supprimer ***/
 	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
-	public String supprimerStock(@ModelAttribute Stock stock) {
+	public String supprimerStock(@ModelAttribute("stock") Stock stock) {
 		String message = "Suppression effectuée avec succés !";
 
 		try {
