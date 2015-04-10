@@ -78,7 +78,7 @@ public abstract class CoreService<T> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         try { 
-        	session.save(obj);
+        	session.update(obj);
         } catch (HibernateException e) {
             e.printStackTrace();
             session.getTransaction().rollback();

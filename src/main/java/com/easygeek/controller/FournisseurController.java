@@ -76,5 +76,47 @@ public class FournisseurController {
 
 		return message;
 	}
+	
+	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
+	   http://localhost:8080/fournisseur/modifier/{id} ***/
+	@RequestMapping(value = "/modifier/{id}",  method = { RequestMethod.GET, RequestMethod.POST })
+	public String modifierFournisseur(@RequestBody String f, @PathVariable Integer id) {
+		String message = "";
+		Fournisseur fournisseur = fournisseurService.get(id);
+		
+		
+		String champs[] = f.split("&");
+		for (int i = 0; i < champs.length; i++){
+			String array[] = champs[i].split("=");
+			switch(array[0]) {
+				case "nom":
+					fournisseur.setNom(array[1]);
+					break;
+				case "telephone":
+					fournisseur.setTelephone(array[1]);
+					break;
+				case "adresse":
+					fournisseur.setAdresse(array[1]);
+					break;
+				case "codePostal":
+					fournisseur.setCodePostal(array[1]);
+					break;
+				case "ville":
+					fournisseur.setVille(array[1]);
+					break;
+			}   
+	    }
+		
+		try {
+			fournisseurService.update(fournisseur);
+			message = "Fournisseur ajouter =)";
+			System.out.println("Ajout d'un fournisseur avec l'id :" + fournisseur.getFournisseurId());
+		} catch (Exception e) {
+			message = "Problème lors de l'ajout d'un fournisseur";
+			System.out.println("Erreur lors de l'ajout d'un fournisseur");
+		}
+		
+		return message;
+	}
 }
 
