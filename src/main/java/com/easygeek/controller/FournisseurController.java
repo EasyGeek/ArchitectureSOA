@@ -122,7 +122,7 @@ public class FournisseurController {
 	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
 	   http://localhost:8080/fournisseur/supprimer/{id} ***/
 	@RequestMapping(value = "/supprimer/{id}",  method = RequestMethod.GET)
-	public String modifierFournisseur(@PathVariable Integer id) {
+	public String supprimerFournisseur(@PathVariable Integer id) {
 		String message = "";
 		Fournisseur fournisseur = fournisseurService.get(id);
 		
