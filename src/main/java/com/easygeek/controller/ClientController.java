@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.easygeek.entite.Client;
+import com.easygeek.entite.Fournisseur;
 import com.easygeek.service.ClientService;
 
 @RestController
@@ -32,6 +33,13 @@ public class ClientController {
 	public List<Client> clients() {
 			List<Client> clients = clientService.getAll();
 		return clients;
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Client getClient(@PathVariable Integer id) {
+		Client client = clientService.get(id);
+		System.out.println("getClient avec l'id : " + id);
+		return client;
 	}
 	
 	@RequestMapping(value = "/connexion", method = RequestMethod.POST)
