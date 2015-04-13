@@ -35,7 +35,7 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "/connexion", method = RequestMethod.POST)
-	public boolean connexion(@RequestBody String c, HttpServletRequest request) throws UnsupportedEncodingException{
+	public boolean connexion(@RequestBody String c) throws UnsupportedEncodingException{
 		String email = null, password = null;
 		String message = "";
 		String champs[] = c.split("&");
