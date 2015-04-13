@@ -17,15 +17,16 @@ public class FournisseurController {
 
 	public FournisseurService fournisseurService = new FournisseurService();
 	
-	/*** Affiche la liste de tous les stocks http://localhost:8080/fournisseur ***/
+	/*** Affiche la liste de tous les fournisseurs
+	 * http://localhost:8080/fournisseur ***/
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Fournisseur> fournisseurs() {
 		List<Fournisseur> fournisseurs = fournisseurService.getAll();
 		return fournisseurs;
 	}
 	
-	/*** Affiche un stock en passant son id dans l'URI grace
-	 au path variable :  http://localhost:8080/fournisseur/id ***/
+	/*** Affiche un fournisseur en passant son id en GET
+	 * au path variable :  http://localhost:8080/fournisseur/id ***/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Fournisseur getFournisseur(@PathVariable Integer id) {
 		Fournisseur fournisseur = fournisseurService.get(id);
@@ -33,8 +34,8 @@ public class FournisseurController {
 		return fournisseur;
 	}
 	
-	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/fournisseur/ajouter ***/
+	/*** Ajoute un fournisseur en passant en POST les champs à renseigner
+	 * http://localhost:8080/fournisseur/ajouter ***/
 	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
 	public String ajoutFournisseur(@RequestBody String f) {
 		String message = "";
@@ -67,14 +68,14 @@ public class FournisseurController {
 			System.out.println("Ajout d'un fournisseur avec l'id :" + fournisseur.getFournisseurId());
 		} catch (Exception e) {
 			message = "Problème lors de l'ajout d'un fournisseur";
-			System.out.println("Erreur lors de l'ajout d'un fournisseur");
+			System.out.println(message);
 		}
 
 		return message;
 	}
 	
-	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/fournisseur/modifier/{id} ***/
+	/*** Modifie un fournisseur en envoyant en post les champs à modifier et en get l'id de l'utilisateur 
+	 * http://localhost:8080/fournisseur/modifier/{id} ***/
 	@RequestMapping(value = "/modifier/{id}",  method = { RequestMethod.GET, RequestMethod.POST })
 	public String modifierFournisseur(@RequestBody String f, @PathVariable Integer id) {
 		String message = "";
@@ -105,30 +106,38 @@ public class FournisseurController {
 		
 		try {
 			fournisseurService.update(fournisseur);
-			message = "Fournisseur modifier.";
-			System.out.println("Modification du fournisseur avec l'id :" + fournisseur.getFournisseurId());
+			message = "Modification du fournisseur avec l'id :" + fournisseur.getFournisseurId();
+			System.out.println(message);
 		} catch (Exception e) {
 			message = "Problème lors de la modification d'un fournisseur";
-			System.out.println("Erreur lors de la modification d'un fournisseur");
+			System.out.println(message);
 		}
 		
 		return message;
 	}
 	
-	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/fournisseur/supprimer/{id} ***/
-	@RequestMapping(value = "/supprimer/{id}",  method = RequestMethod.GET)
-	public String supprimerFournisseur(@PathVariable Integer id) {
+	/*** Suppression d'un fournisseur en envoyant en DELETE le champ id 
+	   http://localhost:8080/fournisseur/supprimer ***/
+	@RequestMapping(value = "/supprimer",  method = RequestMethod.DELETE)
+	public String supprimerFournisseur(@RequestBody String f) {
+		System.out.println(f);
 		String message = "";
-		Fournisseur fournisseur = fournisseurService.get(id);
-		
-		try {
-			fournisseurService.delete(fournisseur);
-			message = "Fournisseur supprimer";
-			System.out.println(message);
-		} catch (Exception e) {
-			message = "Problème lors de la suppression d'un fournisseur";
-			System.out.println(message);
+		if(!f.contains("&")) {
+			String idValue[] = f.split("=");
+			int id = Integer.parseInt(idValue[1]);
+			
+			Fournisseur fournisseur = fournisseurService.get(id);
+			
+			try {
+				fournisseurService.delete(fournisseur);
+				message = "Fournisseur supprimer";
+				System.out.println(message);
+			} catch (Exception e) {
+				message = "Problème lors de la suppression d'un fournisseur";
+				System.out.println(message);
+			}
+		} else {
+			message = "bad argument";
 		}
 		
 		return message;
