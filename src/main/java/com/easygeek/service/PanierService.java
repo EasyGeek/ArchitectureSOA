@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,11 @@ public class PanierService extends CoreDao<Commande>{
 	
 	public Client getClient(Integer idClient){
 		return  (Client) session.createCriteria(Client.class).add(Restrictions.eq("clientId",idClient)).uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Commande> getAllByDate(){
+		return  session.createCriteria(Commande.class).addOrder(Order.asc("dateCommande")).list();
 	}
 
 }
