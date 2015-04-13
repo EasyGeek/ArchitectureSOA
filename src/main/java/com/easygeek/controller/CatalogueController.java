@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.easygeek.entite.Composant;
 import com.easygeek.entite.Marque;
-import com.easygeek.entite.Stock;
 import com.easygeek.entite.Type;
 import com.easygeek.service.CatalogueService;
-import com.easygeek.service.StockService;
 
 @RestController
 @RequestMapping("/catalogue")

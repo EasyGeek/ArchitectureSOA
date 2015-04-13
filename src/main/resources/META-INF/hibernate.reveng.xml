@@ -11,5 +11,5 @@
   <table-filter match-catalog="easygeek" match-name="Type"/>
   <table-filter match-catalog="easygeek" match-name="Type_Livraison"/>
   <table-filter match-catalog="easygeek" match-name="client"/>
-  <table-filter match-catalog="easygeek" match-name="stock"/>
+  <table-filter match-catalog="easygeek" match-name="Stock"/>
 </hibernate-reverse-engineering>

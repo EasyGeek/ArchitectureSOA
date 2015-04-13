@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 14:02:45 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,12 +20,18 @@ public class ComposantFournisseur implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ComposantFournisseurId id;
+	private Double prixAchatHt;
 
 	public ComposantFournisseur() {
 	}
 
 	public ComposantFournisseur(ComposantFournisseurId id) {
 		this.id = id;
+	}
+
+	public ComposantFournisseur(ComposantFournisseurId id, Double prixAchatHt) {
+		this.id = id;
+		this.prixAchatHt = prixAchatHt;
 	}
 
 	@EmbeddedId
@@ -38,6 +44,15 @@ public class ComposantFournisseur implements java.io.Serializable {
 
 	public void setId(ComposantFournisseurId id) {
 		this.id = id;
+	}
+
+	@Column(name = "prix_achat_HT", precision = 22, scale = 0)
+	public Double getPrixAchatHt() {
+		return this.prixAchatHt;
+	}
+
+	public void setPrixAchatHt(Double prixAchatHt) {
+		this.prixAchatHt = prixAchatHt;
 	}
 
 }

@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 14:02:45 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
