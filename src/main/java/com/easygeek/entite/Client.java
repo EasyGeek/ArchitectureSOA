@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -10,6 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +27,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "Client", catalog = "easygeek")
 public class Client implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	private Integer clientId;
 	private String nom;
 	private String prenom;
@@ -141,6 +147,7 @@ public class Client implements java.io.Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
 	public Set<Commande> getCommandes() {

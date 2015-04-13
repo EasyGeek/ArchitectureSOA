@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 
@@ -26,8 +26,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "Commande", catalog = "easygeek")
 public class Commande implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private Integer commandeId;
 	@JsonBackReference
 	private Client client;

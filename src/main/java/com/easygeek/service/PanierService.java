@@ -10,13 +10,14 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import com.easygeek.dao.CoreDao;
 import com.easygeek.entite.Client;
 import com.easygeek.entite.Commande;
 import com.easygeek.entite.TypeLivraison;
 import com.easygeek.util.HibernateUtil;
 
 @Service
-public class PanierService extends CoreService<Commande>{
+public class PanierService extends CoreDao<Commande>{
 	
 	ClientService clientService = new ClientService();
 	

@@ -3,8 +3,8 @@ package com.easygeek.controller;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,22 +30,38 @@ public class StockController {
 	 au path variable :  http://localhost:8080/stock/id ***/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Stock getStock(@PathVariable Integer id) {
-		Stock stock = stockService.get(id);
-		System.out.println("getStock effectué sur le stock id : " + id);
+		Stock stock = new Stock();
+		if(id != null){
+			stock = stockService.get(id);
+			System.out.println("getStock effectué sur le stock id : " + id);
+		} else {
+			System.out.println("getStock avec un id null");
+		}
 		return stock;
 	}
 
-	/*** Ajoute un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/stock/ajouter/quantite/reappro/reference ***/
-	@RequestMapping(value = "/ajouter/{quantite}/{reapprovisionnement}/{reference}", method = RequestMethod.GET)
-	public String ajoutStock(@PathVariable Integer quantite, @PathVariable Boolean reapprovisionnement, @PathVariable String reference) {
+	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
+	public String ajoutStock(@RequestBody String f) {
 		String message = "Ajout effectué avec succés !";
 		
 		Stock stock = new Stock();
-		stock.setQuantite(quantite);
 		stock.setDate(new Date());
-		stock.setReapprovisionnement(reapprovisionnement);
-		stock.setReference(reference);
+		
+		String champs[] = f.split("&");
+		for (int i = 0; i < champs.length; i++){
+			String array[] = champs[i].split("=");
+			switch(array[0]) {
+				case "reapprovisionnement":
+					stock.setReapprovisionnement(Boolean.valueOf(array[1]));
+					break;
+				case "quantite":
+					stock.setQuantite(Integer.valueOf(array[1]));
+					break;
+				case "reference":
+					stock.setReference(array[1]);
+					break;
+			}   
+	    }
 		
 		try {
 			stockService.save(stock);
@@ -62,12 +78,28 @@ public class StockController {
 		return message;
 	}
 
-	/*** Modifie un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/stock/modifier ***/
-	@RequestMapping(value = "/modifier", method = RequestMethod.PUT)
-	public String modifierStock(@ModelAttribute Stock stock) {
+	@RequestMapping(value = "/modifier/{id}", method = { RequestMethod.GET, RequestMethod.POST } )
+	public String modifierStock(@RequestBody String f, @PathVariable Integer id) {
 		String message = "Modification effectuée avec succés !";
 
+		Stock stock = stockService.get(id);
+		
+		String champs[] = f.split("&");
+		for (int i = 0; i < champs.length; i++){
+			String array[] = champs[i].split("=");
+			switch(array[0]) {
+				case "reapprovisionnement":
+					stock.setReapprovisionnement(Boolean.valueOf(array[1]));
+					break;
+				case "quantite":
+					stock.setQuantite(Integer.valueOf(array[1]));
+					break;
+				case "reference":
+					stock.setReference(array[1]);
+					break;
+			}   
+	    }
+		
 		try {
 			stockService.update(stock);
 			System.out.println("Modification d'un stock avec l'id :"
@@ -88,10 +120,12 @@ public class StockController {
 
 	/*** Supprime un stock en passant l'objet en modelattribute par le formulaire 
 	   http://localhost:8080/stock/supprimer ***/
-	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
-	public String supprimerStock(@ModelAttribute Stock stock) {
+	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.GET)
+	public String supprimerStock(@PathVariable Integer id) {
 		String message = "Suppression effectuée avec succés !";
 
+		Stock stock = stockService.get(id);
+		
 		try {
 			stockService.delete(stock);
 			System.out.println("Suppression d'un stock avec l'id :"

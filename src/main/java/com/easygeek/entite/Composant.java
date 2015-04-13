@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 6 avr. 2015 19:09:30 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,14 +13,17 @@ import javax.persistence.Table;
 @Table(name = "Composant", catalog = "easygeek")
 public class Composant implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	private String reference;
 	private String nom;
 	private String description;
 	private Double prixHt;
 	private Integer marqueId;
 	private Integer typeId;
+	private String image;
 
 	public Composant() {
 	}
@@ -30,13 +33,15 @@ public class Composant implements java.io.Serializable {
 	}
 
 	public Composant(String reference, String nom, String description,
-			Double prixHt, Integer marqueId, Integer typeId) {
+			Double prixHt, Integer marqueId, Integer typeId, String image) {
+		super();
 		this.reference = reference;
 		this.nom = nom;
 		this.description = description;
 		this.prixHt = prixHt;
 		this.marqueId = marqueId;
 		this.typeId = typeId;
+		this.image = image;
 	}
 
 	@Id
@@ -92,6 +97,15 @@ public class Composant implements java.io.Serializable {
 
 	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
+	}
+
+	@Column(name = "image", length = 65535)
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
