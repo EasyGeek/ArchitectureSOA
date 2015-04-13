@@ -16,10 +16,7 @@ import com.easygeek.service.PanierService;
 @RestController
 @RequestMapping("/commande")
 public class PanierController {
-/** TODO :
- * - Affichage commandes par client(id)
- * - Ajout commande quantité, réf, + prix HT pour chaque (?)
- */
+
 	public PanierService panierService = new PanierService();
 	
 	/*** Création d'une commande 
@@ -86,6 +83,7 @@ public class PanierController {
 					case "typeLivraison":
 						commande.setTypeLivraisonId(Integer.parseInt(array[1]));
 						break;
+				
 				}  
 			}
 		} catch(Exception e) {
@@ -136,7 +134,6 @@ public class PanierController {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Commande> commandes() {
 		List<Commande> commandes = panierService.getAll();
-		
 		return commandes;
 	}
 	

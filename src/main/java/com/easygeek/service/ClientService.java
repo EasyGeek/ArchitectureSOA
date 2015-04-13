@@ -1,11 +1,15 @@
 package com.easygeek.service;
 
 
+
+
+import java.io.Serializable;
+
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +38,33 @@ public class ClientService extends CoreDao<Client>{
 		else
 			return false;
 	}
+
+
+
+	public Serializable delete(Client obj) {
+	    session.beginTransaction();
+	    try { 
+	     session.delete(obj);
+	    } catch (HibernateException e) {
+	        e.printStackTrace();
+	        session.getTransaction().rollback();
+	    }
+	    
+	    session.getTransaction().commit();
+	  return (Serializable) obj;
+	}
+	 
+	public Serializable update(Client obj) {
+        session.beginTransaction();
+        try { 
+         session.update(obj);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        
+        session.getTransaction().commit();
+        return (Serializable) obj;
+	}
 }
+

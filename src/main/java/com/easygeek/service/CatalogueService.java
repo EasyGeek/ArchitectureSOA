@@ -38,4 +38,5 @@ public class CatalogueService extends CoreDao<Composant>{
 	public List<Type> getAllType(){
 		return session.createCriteria(Type.class).list();
 	}
+
 }
