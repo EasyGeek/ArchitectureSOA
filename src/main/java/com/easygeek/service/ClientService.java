@@ -16,13 +16,4 @@ public class ClientService extends CoreService<Client>{
 		super(Client.class);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Commande> getCommandes(Integer idClient){
-		Criteria criteria =  session.createCriteria(Commande.class);
-		criteria.setFetchMode("Client", FetchMode.JOIN);
-		List<Commande> list = criteria.list();
-		System.out.println(list);
-		return list;
-	}
-	
 }
