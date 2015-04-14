@@ -3,6 +3,8 @@ package com.easygeek.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class StockController {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Stock> getAllStocks() {
 		List<Stock> stocks = stockService.getAll();
-		System.out.println("getAllStocks effectué");
+		System.out.println("getAllStocks");
 		return stocks;
 	}
 
@@ -33,7 +35,7 @@ public class StockController {
 		Stock stock = new Stock();
 		if(id != null){
 			stock = stockService.get(id);
-			System.out.println("getStock effectué sur le stock id : " + id);
+			System.out.println("getStock effectué avec l'id : " + id);
 		} else {
 			System.out.println("getStock avec un id null");
 		}
@@ -41,91 +43,46 @@ public class StockController {
 	}
 
 	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
-	public String ajoutStock(@RequestBody String f) {
-		String message = "Ajout effectué avec succés !";
-		
-		Stock stock = new Stock();
+	public ResponseEntity<Stock> ajoutStock(@RequestBody Stock stock) {
 		stock.setDate(new Date());
-		
-		String champs[] = f.split("&");
-		for (int i = 0; i < champs.length; i++){
-			String array[] = champs[i].split("=");
-			switch(array[0]) {
-				case "reapprovisionnement":
-					stock.setReapprovisionnement(Boolean.valueOf(array[1]));
-					break;
-				case "quantite":
-					stock.setQuantite(Integer.valueOf(array[1]));
-					break;
-				case "reference":
-					stock.setReference(array[1]);
-					break;
-			}   
-	    }
-		
 		try {
 			stockService.save(stock);
 			System.out.println("Ajout d'un stock avec l'id :" + stock.getId());
 		} catch (Exception e) {
-			message = "Problème lors de l'ajout d'un stock pour l'article référencé : "
-					+ stock.getReference();
 			System.out.println("Erreur lors de l'ajout d'un stock avec l'id :"
 					+ stock.getId() + "et l'article référencé :"
 					+ stock.getReference());
-			return message;
+			return new ResponseEntity<Stock>(new Stock(), HttpStatus.OK);
 		}
 
-		return message;
+		return new ResponseEntity<Stock>(stock, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/modifier/{id}", method = { RequestMethod.GET, RequestMethod.POST } )
-	public String modifierStock(@RequestBody String f, @PathVariable Integer id) {
-		String message = "Modification effectuée avec succés !";
+	@RequestMapping(value = "/modifier", method = RequestMethod.POST )
+	public ResponseEntity<Stock> modifierStock(@RequestBody Stock stock) {
 
-		Stock stock = stockService.get(id);
-		
-		String champs[] = f.split("&");
-		for (int i = 0; i < champs.length; i++){
-			String array[] = champs[i].split("=");
-			switch(array[0]) {
-				case "reapprovisionnement":
-					stock.setReapprovisionnement(Boolean.valueOf(array[1]));
-					break;
-				case "quantite":
-					stock.setQuantite(Integer.valueOf(array[1]));
-					break;
-				case "reference":
-					stock.setReference(array[1]);
-					break;
-			}   
-	    }
+		stock.setDate(new Date());
 		
 		try {
 			stockService.update(stock);
 			System.out.println("Modification d'un stock avec l'id :"
 					+ stock.getId());
 		} catch (Exception e) {
-			message = "Problème lors de la modification d'un stock pour l'article référencé : "
-					+ stock.getReference();
 			System.out
 					.println("Erreur lors de la modification d'un stock avec l'id :"
 							+ stock.getId()
 							+ "et l'article référencé :"
 							+ stock.getReference());
-			return message;
+			return new ResponseEntity<Stock>(new Stock(), HttpStatus.OK);
 		}
 
-		return message;
+		return new ResponseEntity<Stock>(stock, HttpStatus.OK);
 	}
 
-	/*** Supprime un stock en passant l'objet en modelattribute par le formulaire 
-	   http://localhost:8080/stock/supprimer ***/
-	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.GET)
-	public String supprimerStock(@PathVariable Integer id) {
+	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
+	public String supprimerStock(@RequestBody Stock stock) {
 		String message = "Suppression effectuée avec succés !";
 
-		Stock stock = stockService.get(id);
-		
 		try {
 			stockService.delete(stock);
 			System.out.println("Suppression d'un stock avec l'id :"

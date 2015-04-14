@@ -18,64 +18,88 @@ import com.easygeek.service.FournisseurService;
 public class FournisseurController {
 
 	public FournisseurService fournisseurService = new FournisseurService();
-	
-	/*** Affiche la liste de tous les fournisseurs
-	 * http://localhost:8080/fournisseur ***/
+
+	/***
+	 * Affiche la liste de tous les fournisseurs
+	 * http://localhost:8080/fournisseur
+	 ***/
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Fournisseur> fournisseurs() {
 		List<Fournisseur> fournisseurs = fournisseurService.getAll();
+		System.out.println("getAllFournisseurs");
 		return fournisseurs;
 	}
-	
-	/*** Affiche un fournisseur en passant son id en GET
-	 * au path variable :  http://localhost:8080/fournisseur/id ***/
+
+	/***
+	 * Affiche un fournisseur en passant son id en GET au path variable :
+	 * http://localhost:8080/fournisseur/id
+	 ***/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Fournisseur getFournisseur(@PathVariable Integer id) {
 		Fournisseur fournisseur = fournisseurService.get(id);
-		System.out.println("getFourniseur avec l'id : " + id);
+		System.out.println("getFournisseur avec l'id : " + id);
 		return fournisseur;
 	}
-	
-	/*** Ajoute un fournisseur en passant un json contenant l'objet en POST
-	 * http://localhost:8080/fournisseur/ajouter ***/
+
+	/***
+	 * Ajoute un fournisseur en passant un json contenant l'objet en POST
+	 * http://localhost:8080/fournisseur/ajouter
+	 ***/
 	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
-	public ResponseEntity ajoutFournisseur(@RequestBody Fournisseur c){
+	public ResponseEntity<Fournisseur> ajoutFournisseur(
+			@RequestBody Fournisseur fournisseur) {
 		try {
-			fournisseurService.save(c);
-			System.out.println("Ajout d'un fournisseur avec l'id :" + c.getFournisseurId());
+			fournisseurService.save(fournisseur);
+			System.out.println("Le fournisseur "
+					+ fournisseur.getNom() + " avec l'id "
+					+ fournisseur.getFournisseurId() + " a été ajouté avec succès !");
 		} catch (Exception e) {
-			System.out.println("Erreur lors de l'ajout du client");
+			System.out.println("Erreur lors de l'ajout du fournisseur"
+					+ fournisseur.getNom() + "avec l'id : "
+					+ fournisseur.getFournisseurId());
 		}
-		return new ResponseEntity<Fournisseur>(c, HttpStatus.OK);
+		return new ResponseEntity<Fournisseur>(fournisseur, HttpStatus.OK);
 	}
-	
-	/*** Modifie un fournisseur en envoyant en post les champs à modifier et en get l'id de l'utilisateur 
-	 * http://localhost:8080/fournisseur/modifier/{id} ***/
+
+	/***
+	 * Modifie un fournisseur en envoyant en post les champs à modifier et en
+	 * get l'id de l'utilisateur http://localhost:8080/fournisseur/modifier/{id}
+	 ***/
 	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
-	public ResponseEntity modifierFournisseur(@RequestBody Fournisseur c) {
+	public ResponseEntity<Fournisseur> modifierFournisseur(
+			@RequestBody Fournisseur fournisseur) {
 		try {
-			fournisseurService.update(c);
-			System.out.println("Modification du client avec l'id :" + c.getFournisseurId());
+			fournisseurService.update(fournisseur);
+			System.out.println("Le fournisseur "
+					+ fournisseur.getNom() + " avec l'id "
+					+ fournisseur.getFournisseurId() + " a été modifié avec succès !");
 		} catch (Exception e) {
-			System.out.println("Erreur lors de la modification du client");
+			System.out.println("Erreur lors de la modification du fournisseur"
+					+ fournisseur.getNom() + "avec l'id : "
+					+ fournisseur.getFournisseurId());
 		}
-		return new ResponseEntity<Fournisseur>(c, HttpStatus.OK);
+		return new ResponseEntity<Fournisseur>(fournisseur, HttpStatus.OK);
 	}
-	
-	/*** Suppression d'un fournisseur en envoyant en DELETE le champ id 
-	   http://localhost:8080/fournisseur/supprimer ***/
-	@RequestMapping(value = "/supprimer",  method = RequestMethod.DELETE)
-	public String supprimerFournisseur(@RequestBody Fournisseur c) {
+
+	/***
+	 * Suppression d'un fournisseur en envoyant en DELETE le champ id
+	 * http://localhost:8080/fournisseur/supprimer
+	 ***/
+	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
+	public String supprimerFournisseur(@RequestBody Fournisseur fournisseur) {
 		String message;
 		try {
-			fournisseurService.delete(c);
+			fournisseurService.delete(fournisseur);
 			message = "Success";
-			System.out.println("Fournisseur supprimer");
+			System.out.println("Le fournisseur "
+					+ fournisseur.getNom() + " avec l'id "
+					+ fournisseur.getFournisseurId() + " a été supprimé avec succès !");
 		} catch (Exception e) {
 			message = "Failed";
-			System.out.println("Problème lors de la suppression du fournisseur");
+			System.out.println("Problème lors de la suppression du fournisseur"
+					+ fournisseur.getNom() + " avec l'id : "
+					+ fournisseur.getFournisseurId());
 		}
 		return message;
 	}
 }
-
