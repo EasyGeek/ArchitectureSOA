@@ -1,25 +1,17 @@
 package com.easygeek.controller;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.easygeek.entite.Client;
-import com.easygeek.entite.Fournisseur;
 import com.easygeek.service.ClientService;
 
 @RestController
@@ -73,7 +65,7 @@ public class ClientController {
 				case "nom":
 					client.setNom(array[1]);
 					break;
-				case "prénom":
+				case "prenom":
 					client.setNom(array[1]);
 					break;
 				case "adresse":
@@ -109,7 +101,7 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/modifier/{id}",  method = { RequestMethod.GET, RequestMethod.POST })
-	public String modifierClient(@RequestBody String c, @PathVariable Integer id){
+	public String modifierClient(@RequestBody String c, @PathVariable Integer id) throws UnsupportedEncodingException{
 		String message = "";
 		Client client = clientService.get(id);
 		
@@ -120,7 +112,7 @@ public class ClientController {
 			case "nom":
 				client.setNom(array[1]);
 				break;
-			case "prénom":
+			case "prenom":
 				client.setNom(array[1]);
 				break;
 			case "adresse":
@@ -136,6 +128,7 @@ public class ClientController {
 				client.setTelephone(array[1]);
 				break;
 			case "email":
+				array[1] = new String(array[1].getBytes("iso-8859-1"), "utf8");
 				client.setEmail(array[1]);
 				break;
 			case "password":
@@ -154,19 +147,29 @@ public class ClientController {
 		return message;
 	}
 	
-	@RequestMapping(value = "/supprimer/{id}",  method = RequestMethod.GET)
-	public String supprimerClient(@PathVariable Integer id){
+	/*** Suppression d'un client en envoyant en DELETE le champ id 
+	   http://localhost:8080/fournisseur/supprimer ***/
+	@RequestMapping(value = "/supprimer",  method = RequestMethod.DELETE)
+	public String supprimerClient(@RequestBody String f) {
 		String message = "";
-		Client client = clientService.get(id);
+		if(!f.contains("&")) {
+			String idValue[] = f.split("=");
+			int id = Integer.parseInt(idValue[1]);
+			
+			Client client = clientService.get(id);
+			
+			try {
+				clientService.delete(client);
+				message = "Client supprimer";
+				System.out.println(message);
+			} catch (Exception e) {
+				message = "Problème lors de la suppression du client";
+				System.out.println(message);
+			}
+		} else {
+			message = "bad argument";
+		}
 		
-		try {
-			clientService.delete(client);
-			message = "Client supprimé avec succès";
-			System.out.println(message);
-		} catch (Exception e) {
-			message = "Problème lors de la suppression du client";
-			System.out.println(message);
-		}		
 		return message;
-	}	
+	}
 }

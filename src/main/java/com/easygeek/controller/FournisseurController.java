@@ -120,7 +120,6 @@ public class FournisseurController {
 	   http://localhost:8080/fournisseur/supprimer ***/
 	@RequestMapping(value = "/supprimer",  method = RequestMethod.DELETE)
 	public String supprimerFournisseur(@RequestBody String f) {
-		System.out.println(f);
 		String message = "";
 		if(!f.contains("&")) {
 			String idValue[] = f.split("=");

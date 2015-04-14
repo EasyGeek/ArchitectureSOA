@@ -66,5 +66,10 @@ public class ClientService extends CoreDao<Client>{
         session.getTransaction().commit();
         return (Serializable) obj;
 	}
+	
+	public Boolean verifEmailNotExist(String email) {
+		System.out.println(email);
+		return true;
+	}
 }
 
