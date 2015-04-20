@@ -29,12 +29,12 @@ public class ClientService extends CoreDao<Client> {
 			return false;
 	}
 	
-	public Boolean verifEmailNotExist(String email, String action) {
-		Criteria query = null;
-		if (action == "ajouter" || action == "modifier")
+	public Boolean verifEmailNotExist(Client client, String action) {
+		Criteria query = session.createCriteria(Client.class)
+				.add(Restrictions.eq("email", client.getEmail()));
+		if (action == "modifier")
 		{
-			query = session.createCriteria(Client.class)
-					.add(Restrictions.eq("email", email));
+			query.add(Restrictions.not(Restrictions.eq("clientId", client.getClientId())));
 		}
 		List<Client> clients = query.list();
 	

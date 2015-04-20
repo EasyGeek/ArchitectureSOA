@@ -34,35 +34,43 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
-	public ResponseEntity ajoutClient(@RequestBody Client c){
+	public ResponseEntity<Client> ajoutClient(@RequestBody Client c){
+		ResponseEntity<Client> response;
 		try {
-			if (clientService.verifEmailNotExist(c.getEmail(), "ajouter"))
+			if (clientService.verifEmailNotExist(c, "ajouter"))
 			{
 				clientService.save(c);
-				System.out.println("Ajout d'un fournisseur avec l'id :" + c.getClientId());
+				System.out.println("Ajout d'un client avec l'id :" + c.getClientId());
+				response = new ResponseEntity<Client>(c, HttpStatus.OK);
 			}else{
-				System.out.println("fuck of");
+				System.out.println("Adresse mail déjà utiliser");
+				response = new ResponseEntity<Client>(c, HttpStatus.METHOD_NOT_ALLOWED);
 			}
 		} catch (Exception e) {
 			System.out.println("Erreur lors de l'ajout du client");
+			response = new ResponseEntity<Client>(c, HttpStatus.METHOD_NOT_ALLOWED);
 		}
-		return new ResponseEntity<Client>(c, HttpStatus.OK);
+		return response;
 	}
 
 	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
-	public ResponseEntity modifierClient(@RequestBody Client c) {
+	public ResponseEntity<Client> modifierClient(@RequestBody Client c) {
+		ResponseEntity<Client> response;
 		try {
-			if (clientService.verifEmailNotExist(c.getEmail(), "modifier"))
+			if (clientService.verifEmailNotExist(c, "modifier"))
 			{
 				clientService.update(c);
 				System.out.println("Modification du client avec l'id :" + c.getClientId());
+				response = new ResponseEntity<Client>(c, HttpStatus.OK);
 			}else{
-				System.out.println("fuck of");
+				System.out.println("Adresse mail déjà utiliser");
+				response = new ResponseEntity<Client>(c, HttpStatus.METHOD_NOT_ALLOWED);
 			}
 		} catch (Exception e) {
 			System.out.println("Erreur lors de la modification du client");
+			response = new ResponseEntity<Client>(c, HttpStatus.METHOD_NOT_ALLOWED);
 		}
-		return new ResponseEntity<Client>(c, HttpStatus.OK);
+		return response;
 	}
 	
 
