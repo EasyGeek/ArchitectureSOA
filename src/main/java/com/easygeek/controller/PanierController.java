@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.easygeek.entite.Commande;
+import com.easygeek.entite.Fournisseur;
 import com.easygeek.service.PanierService;
 
 @RestController
@@ -21,94 +24,51 @@ public class PanierController {
 	
 	/*** Création d'une commande 
 	   http://localhost:8080/commande/ajouter ***/
-	@RequestMapping(value = "/ajouter", method = RequestMethod.POST	)
-	public String creerCommande(@RequestBody String c) {
-		String message = "";
-		String champs[] = c.split("&");
-		Commande commande = new Commande();
-		commande.setDateCommande(new Date(new Date().getTime()));
-		
-		try{
-			for (int i = 0; i < champs.length; i++){
-				String array[] = champs[i].split("=");
-				
-				
-				switch(array[0]) {
-						
-					case "prixHT":
-						commande.setPrixHt(Double.parseDouble(array[1]));
-						break;
-					case "client":
-						commande.setClient(panierService.getClient(Integer.parseInt(array[1])));
-						break;
-					case "typeLivraison":
-						commande.setTypeLivraisonId((Integer.parseInt(array[1])));
-						break;
-				}  
-			}
-		} catch(Exception e) {
-			message = "Erreur";
-		}
-			try {
-				panierService.save(commande);
-				message = "Commande créée avec succès !";
-				System.out.println("ID Commande :" + commande.getCommandeId());
-			} catch (Exception e) {
-				message = "Erreur lors de la création de la commander";
-				System.out.println("Erreur lors de la création de la commander");
-			}
-
-			return message;
-		}
 	
-	/***
-	 * Modification d'une commande
-	 */
-	@RequestMapping(value = "/modifier/{id}",  method = { RequestMethod.GET, RequestMethod.POST })
-	public String modifierCommande(@RequestBody String f, @PathVariable Integer id) {
-		String message = "";
+	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
+	public ResponseEntity<Commande> ajoutCommande(@RequestBody Commande commande) {
+		try {
+			commande.setDateCommande(new Date(new Date().getTime()));
+			panierService.save(commande);
+			System.out.println("La commande n° "
+					+ commande.getCommandeId() 
+					+ " a été ajoutée avec succès !");
+		} catch (Exception e) {
+			System.out.println("Erreur lors de l'ajout de la commande n°"
+					+ commande.getCommandeId());
+		}
+		return new ResponseEntity<Commande>(commande, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Commande getCommande(@PathVariable Integer id) {
 		Commande commande = panierService.get(id);
-		String champs[] = f.split("&");
-		commande.setDateCommande(new Date(new Date().getTime()));
-		try{
-			for (int i = 0; i < champs.length; i++){
-				String array[] = champs[i].split("=");
-				switch(array[0]) {
-					case "prixHT":
-						commande.setPrixHt(Double.parseDouble(array[1]));
-						break;
-					case "client":
-						commande.setClient(panierService.getClient(Integer.parseInt(array[1])));
-						break;
-					case "typeLivraison":
-						commande.setTypeLivraisonId(Integer.parseInt(array[1]));
-						break;
-				
-				}  
-			}
-		} catch(Exception e) {
-			message = "Erreur";
+		System.out.println("getCommandeavec l'id : " + id);
+		return commande;
+	}
+	
+	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
+	public ResponseEntity<Commande> modifierCommande(@RequestBody Commande commande) {
+		
+		try {
+			commande.setDateCommande(new Date(new Date().getTime()));
+			panierService.update(commande);
+			System.out.println("La commande n°  "
+					+ commande.getCommandeId() +  " a été modifiée avec succès !");
+		} catch (Exception e) {
+			System.out.println("Erreur lors de la modification de la commande n°" 
+					+ commande.getCommandeId());
 		}
-			try {
-				panierService.update(commande);
-				message = "Commande modifiée avec succès !";
-				System.out.println("ID Commande :" + commande.getCommandeId());
-			} catch (Exception e) {
-				message = "Problème lors de la modification";
-				System.out.println("Erreur de modification");
-			}
-
-			return message;
-		}
+		return new ResponseEntity<Commande>(commande, HttpStatus.OK);
+	}
+	
 
 	/***
 	 * Suppression d'une commande
 	 */
-	@RequestMapping(value = "/supprimer/{id}",  method = RequestMethod.GET)
-	public String supprimerCommande(@PathVariable Integer id) {
+	@RequestMapping(value = "/supprimer",  method = RequestMethod.DELETE)
+	public String supprimerCommande(@RequestBody Commande commande) {
 		String message = "";
-		Commande commande = panierService.get(id);
-		
 		try {
 			panierService.delete(commande);
 			message = "Commande supprimée avec succès";
@@ -130,13 +90,7 @@ public class PanierController {
 		commandes = panierService.getCommandes(id);
 		return commandes;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Commande> commandes() {
-		List<Commande> commandes = panierService.getAll();
-		return commandes;
-	}
-	
+
 }
 	
 	
