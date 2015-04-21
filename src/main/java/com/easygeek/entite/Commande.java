@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 14:02:45 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 
@@ -26,8 +26,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "Commande", catalog = "easygeek")
 public class Commande implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer commandeId;
-	@JsonBackReference
 	private Client client;
 	private Date dateCommande;
 	private Double prixHt;
@@ -55,12 +58,13 @@ public class Commande implements java.io.Serializable {
 		this.commandeId = commandeId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
+	@JsonBackReference
 	public Client getClient() {
 		return this.client;
 	}
-
+	
 	public void setClient(Client client) {
 		this.client = client;
 	}

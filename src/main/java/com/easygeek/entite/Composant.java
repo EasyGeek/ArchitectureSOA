@@ -1,5 +1,5 @@
 package com.easygeek.entite;
-// Generated 13 avr. 2015 08:45:54 by Hibernate Tools 4.3.1
+// Generated 13 avr. 2015 14:02:45 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +21,11 @@ public class Composant implements java.io.Serializable {
 	private String nom;
 	private String description;
 	private Double prixHt;
+	private Double pourcentageMarge;
+	private String image;
+	private Double promotion;
 	private Integer marqueId;
 	private Integer typeId;
-	private String image;
 
 	public Composant() {
 	}
@@ -33,15 +35,17 @@ public class Composant implements java.io.Serializable {
 	}
 
 	public Composant(String reference, String nom, String description,
-			Double prixHt, Integer marqueId, Integer typeId, String image) {
-		super();
+			Double prixHt, Double pourcentageMarge, String image,
+			Double promotion, Integer marqueId, Integer typeId) {
 		this.reference = reference;
 		this.nom = nom;
 		this.description = description;
 		this.prixHt = prixHt;
+		this.pourcentageMarge = pourcentageMarge;
+		this.image = image;
+		this.promotion = promotion;
 		this.marqueId = marqueId;
 		this.typeId = typeId;
-		this.image = image;
 	}
 
 	@Id
@@ -81,6 +85,33 @@ public class Composant implements java.io.Serializable {
 		this.prixHt = prixHt;
 	}
 
+	@Column(name = "pourcentage_marge", precision = 22, scale = 0)
+	public Double getPourcentageMarge() {
+		return this.pourcentageMarge;
+	}
+
+	public void setPourcentageMarge(Double pourcentageMarge) {
+		this.pourcentageMarge = pourcentageMarge;
+	}
+
+	@Column(name = "image", length = 65535)
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Column(name = "promotion", precision = 22, scale = 0)
+	public Double getPromotion() {
+		return this.promotion;
+	}
+
+	public void setPromotion(Double promotion) {
+		this.promotion = promotion;
+	}
+
 	@Column(name = "marque_id")
 	public Integer getMarqueId() {
 		return this.marqueId;
@@ -97,15 +128,6 @@ public class Composant implements java.io.Serializable {
 
 	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
-	}
-
-	@Column(name = "image", length = 65535)
-	public String getImage() {
-		return this.image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 }
