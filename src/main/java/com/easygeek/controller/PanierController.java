@@ -82,12 +82,22 @@ public class PanierController {
 	}
 	
 	/***
-	 * Affichae des commandes par client
+	 * Affichage des commandes par client
 	 */
 	@RequestMapping(value = "/client/{id}",  method = {RequestMethod.GET})
 	public List<Commande> getCommandesByClient(@PathVariable Integer id){
 		List<Commande> commandes = new ArrayList<Commande>();
 		commandes = panierService.getCommandes(id);
+		return commandes;
+	}
+	
+	/***
+	 * Historique des commandes par client
+	 */
+	@RequestMapping(value = "/client/{id}/historique",  method = {RequestMethod.GET})
+	public List<Commande> getCommandesHistorique(@PathVariable Integer id){
+		List<Commande> commandes = new ArrayList<Commande>();
+		commandes = panierService.getAllByDate(id);
 		return commandes;
 	}
 
