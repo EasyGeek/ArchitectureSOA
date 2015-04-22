@@ -29,6 +29,8 @@ public class Stock implements java.io.Serializable {
 	private Date dateStock;
 	private Boolean reapprovisionnement;
 	private Integer quantite;
+	private Integer fournisseurId;
+	
 
 	public Stock() {
 	}
@@ -56,6 +58,15 @@ public class Stock implements java.io.Serializable {
 		this.idStock = idStock;
 	}
 	
+	@Column(name = "Fournisseur_id",nullable = false)
+	public Integer getFournisseurId() {
+		return fournisseurId;
+	}
+
+	public void setFournisseurId(Integer fournisseurId) {
+		this.fournisseurId = fournisseurId;
+	}
+
 	@Column(name = "reference", nullable = false)
 	public String getReference() {
 		return this.reference;
