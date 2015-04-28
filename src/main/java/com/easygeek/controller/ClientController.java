@@ -78,15 +78,18 @@ public class ClientController {
 	 * Suppression d'un client en envoyant en DELETE le champ id
 	 * http://localhost:8080/fournisseur/supprimer
 	 ***/
-	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
-	public String supprimerClient(@RequestBody Client c) {
+	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
+	public String supprimerClient(@PathVariable Integer id) {
 		String message;
+		
+		Client client = clientService.get(id);
+		
 		try {
-			clientService.delete(c);
-			message = "Success";
+			clientService.delete(client);
+			message = "Le client a été supprimé avec succés.";
 			System.out.println("Client supprimer");
 		} catch (Exception e) {
-			message = "Failed";
+			message = "Le client n'a pas été supprimé car il possède encore des commandes.";
 			System.out.println("Problème lors de la suppression du client");
 		}
 		return message;
