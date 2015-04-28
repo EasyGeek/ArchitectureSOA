@@ -73,13 +73,9 @@ public class PanierService extends CoreDao<Commande>{
 		return (Serializable) commande;
 	}
 	
-	public Client getClient(Integer idClient){
-		return  (Client) session.createCriteria(Client.class).add(Restrictions.eq("clientId",idClient)).uniqueResult();
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Commande> getAllByDate(Integer idClient){
-		Criteria criteria =  session.createCriteria(Commande.class).add(Restrictions.eq("client", clientService.get(idClient))).addOrder(Order.desc("dateCommande"));
+		Criteria criteria =  session.createCriteria(Commande.class).add(Restrictions.eq("client", idClient)).addOrder(Order.desc("dateCommande"));
 		criteria.setFetchMode("Client", FetchMode.JOIN);
 		
 		List<Commande> list = criteria.list();
