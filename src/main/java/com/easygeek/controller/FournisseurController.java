@@ -85,17 +85,18 @@ public class FournisseurController {
 	 * Suppression d'un fournisseur en envoyant en DELETE le champ id
 	 * http://localhost:8080/fournisseur/supprimer
 	 ***/
-	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
-	public String supprimerFournisseur(@RequestBody Fournisseur fournisseur) {
+	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
+	public String supprimerFournisseur(@PathVariable Integer id) {
 		String message;
+		Fournisseur fournisseur = fournisseurService.get(id);
 		try {
 			fournisseurService.delete(fournisseur);
-			message = "Success";
+			message = "Le fournisseur a été supprimé avec succés.";
 			System.out.println("Le fournisseur "
 					+ fournisseur.getNom() + " avec l'id "
 					+ fournisseur.getFournisseurId() + " a été supprimé avec succès !");
 		} catch (Exception e) {
-			message = "Failed";
+			message = "Le fournisseur n'a pas été supprimé car il possède encore des composants.";
 			System.out.println("Problème lors de la suppression du fournisseur"
 					+ fournisseur.getNom() + " avec l'id : "
 					+ fournisseur.getFournisseurId());

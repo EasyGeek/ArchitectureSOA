@@ -79,10 +79,12 @@ public class StockController {
 		return new ResponseEntity<Stock>(stock, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/supprimer", method = RequestMethod.DELETE)
-	public String supprimerStock(@RequestBody Stock stock) {
+	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
+	public String supprimerStock(@PathVariable Integer id) {
 		String message = "Suppression effectuée avec succés !";
 
+		Stock stock = stockService.get(id);
+		
 		try {
 			stockService.delete(stock);
 			System.out.println("Suppression d'un stock avec l'id :"
