@@ -19,12 +19,12 @@ public class CatalogueService extends CoreDao<Composant>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Composant> getAllComposantByMarque(Integer idMarque){
-		return session.createCriteria(Composant.class).add(Restrictions.eq("marqueId",idMarque)).list();
+		return session.createCriteria(Composant.class).add(Restrictions.eq("marqueId.marqueId",idMarque)).list();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Composant> getAllComposantByType(Integer idType){
-		return session.createCriteria(Composant.class).add(Restrictions.eq("typeId",idType)).list();
+		return session.createCriteria(Composant.class).add(Restrictions.eq("typeId.typeId",idType)).list();
 	}
 	
 	@SuppressWarnings("unchecked")
