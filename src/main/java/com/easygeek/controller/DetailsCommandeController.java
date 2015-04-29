@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.easygeek.entite.Commande;
 import com.easygeek.entite.DetailsCommande;
 import com.easygeek.service.DetailsCommandeService;
 
@@ -19,11 +20,25 @@ public class DetailsCommandeController {
 	
 	public DetailsCommandeService detailsService = new DetailsCommandeService();
 	
-	@RequestMapping(value = "/{idCommande}", method = RequestMethod.GET)
-	public List<DetailsCommande> getDetails(@PathVariable Integer idCommande) {
-		List<DetailsCommande> details  = detailsService.getDetails(idCommande);
+	@RequestMapping(method = RequestMethod.GET)
+	public List<DetailsCommande> getAllDetails() {
+		List<DetailsCommande> detailsCom = detailsService.getAll();
+		System.out.println("getAllFournisseurs");
+		return detailsCom;
+	}
+	
+	@RequestMapping(value = "/commande/{idCommande}", method = RequestMethod.GET)
+	public List<DetailsCommande> getDetailsCom(@PathVariable Integer idCommande) {
+		List<DetailsCommande> details  = detailsService.getDetailsCom(idCommande);
 		
 
+		return details;
+	}
+	
+	@RequestMapping(value = "/reference/{reference}", method = RequestMethod.GET)
+	public List<DetailsCommande> getDetailsRef(@PathVariable String reference) {
+		List<DetailsCommande> details  = detailsService.getDetailsRef(reference);
+		
 		return details;
 	}
 	

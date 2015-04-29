@@ -14,9 +14,16 @@ public class DetailsCommandeService extends CoreDao<DetailsCommande> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<DetailsCommande> getDetails(Integer idCommande){
+	public List<DetailsCommande> getDetailsCom(Integer idCommande){
 		return (List<DetailsCommande>) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("commande.commandeId",idCommande)).list();
 				
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DetailsCommande> getDetailsRef(String reference){
+		return (List<DetailsCommande>) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("composant.reference",reference)).list();
+				
+	}
+	
 	
 }

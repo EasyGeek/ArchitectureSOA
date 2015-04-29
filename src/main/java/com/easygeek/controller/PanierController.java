@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.easygeek.entite.Commande;
 import com.easygeek.entite.Composant;
+import com.easygeek.entite.Fournisseur;
 import com.easygeek.service.PanierService;
 
 @RestController
@@ -23,7 +24,15 @@ public class PanierController {
 	public PanierService panierService = new PanierService();
 	
 	/*** Création d'une commande 
-	   http://localhost:8080/commande/ajouter ***/
+	   http://localhost:8080/commande/ajouter 
+	 * @return ***/
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Commande> getCommandes() {
+		List<Commande> commandes = panierService.getAll();
+		System.out.println("getAllFournisseurs");
+		return commandes;
+	}
 	
 	@RequestMapping(value = "/ajouter", method = RequestMethod.POST)
 	public ResponseEntity<Commande> ajoutCommande(@RequestBody Commande commande,Composant composant) {
