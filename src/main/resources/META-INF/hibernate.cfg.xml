@@ -15,7 +15,6 @@
   <mapping class="com.easygeek.entite.Commande"/>
   <mapping class="com.easygeek.entite.Composant"/>
   <mapping class="com.easygeek.entite.ComposantFournisseur"/>
-  <mapping class="com.easygeek.entite.ComposantFournisseurId"/>
   <mapping class="com.easygeek.entite.Fournisseur"/>
   <mapping class="com.easygeek.entite.Marque"/>
   <mapping class="com.easygeek.entite.DetailsCommande"/>
