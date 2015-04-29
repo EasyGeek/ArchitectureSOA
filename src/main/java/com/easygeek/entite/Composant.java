@@ -1,8 +1,11 @@
 package com.easygeek.entite;
 // Generated 13 avr. 2015 14:02:45 by Hibernate Tools 4.3.1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -49,6 +52,7 @@ public class Composant implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "reference", unique = true, nullable = false)
 	public String getReference() {
 		return this.reference;

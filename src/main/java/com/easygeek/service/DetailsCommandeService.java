@@ -1,8 +1,5 @@
 package com.easygeek.service;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.easygeek.dao.CoreDao;
@@ -26,9 +23,9 @@ public class DetailsCommandeService extends CoreDao<DetailsCommande> {
 		
 		return (DetailsCommande) criteria.uniqueResult();*/
 		
-		DetailsCommande Detail = (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id.commandeId",idCommande)).uniqueResult();
+		DetailsCommande detail = (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id.commandeId",idCommande)).uniqueResult();
 		
-		return (Composant) session.createCriteria(Composant.class).add(Restrictions.eq("reference",Detail.getId().getReference())).uniqueResult();
+		return (Composant) session.createCriteria(Composant.class).add(Restrictions.eq("reference",detail.getReference())).uniqueResult();
 		
 	}
 	

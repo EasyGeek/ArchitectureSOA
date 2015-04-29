@@ -19,7 +19,6 @@
   <mapping class="com.easygeek.entite.Fournisseur"/>
   <mapping class="com.easygeek.entite.Marque"/>
   <mapping class="com.easygeek.entite.DetailsCommande"/>
-  <mapping class="com.easygeek.entite.DetailsCommandeId"/>
   <mapping class="com.easygeek.entite.Stock"/>
   <mapping class="com.easygeek.entite.Type"/>
   <mapping class="com.easygeek.entite.TypeLivraison"/>
