@@ -26,11 +26,11 @@ public class Stock implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer idStock;
-	private String reference;
 	private Date dateStock;
 	private Boolean reapprovisionnement;
 	private Integer quantite;
-	private Fournisseur fournisseurId;
+	private Composant composant;
+	private Fournisseur fournisseur;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -43,13 +43,14 @@ public class Stock implements java.io.Serializable {
 		this.idStock = idStock;
 	}
 	
-	@Column(name = "reference", nullable = false)
-	public String getReference() {
-		return this.reference;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="reference")
+	public Composant getComposant() {
+		return this.composant;
 	}
 
-	public void setReference(String reference) {
-		this.reference = reference;
+	public void setComposant(Composant composant) {
+		this.composant = composant;
 	}
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -82,12 +83,12 @@ public class Stock implements java.io.Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="Fournisseur_id")
-	public Fournisseur getFournisseurId() {
-		return fournisseurId;
+	public Fournisseur getFournisseur() {
+		return fournisseur;
 	}
 
-	public void setFournisseurId(Fournisseur fournisseurId) {
-		this.fournisseurId = fournisseurId;
+	public void setFournisseur(Fournisseur fournisseur) {
+		this.fournisseur = fournisseur;
 	}
 	
 //	@Column(name = "Fournisseur_id",nullable = false)

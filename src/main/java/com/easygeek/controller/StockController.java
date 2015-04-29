@@ -51,7 +51,7 @@ public class StockController {
 		} catch (Exception e) {
 			System.out.println("Erreur lors de l'ajout d'un stock avec l'id :"
 					+ stock.getId() + "et l'article référencé :"
-					+ stock.getReference());
+					+ stock.getComposant().getReference());
 			return new ResponseEntity<Stock>(new Stock(), HttpStatus.OK);
 		}
 
@@ -72,7 +72,7 @@ public class StockController {
 					.println("Erreur lors de la modification d'un stock avec l'id :"
 							+ stock.getId()
 							+ "et l'article référencé :"
-							+ stock.getReference());
+							+ stock.getComposant().getReference());
 			return new ResponseEntity<Stock>(new Stock(), HttpStatus.OK);
 		}
 
@@ -91,12 +91,12 @@ public class StockController {
 					+ stock.getId());
 		} catch (Exception e) {
 			message = "Problème lors de la suppression d'un stock pour l'article référencé : "
-					+ stock.getReference();
+					+ stock.getComposant().getReference();
 			System.out
 					.println("Erreur lors de la suppression d'un stock avec l'id :"
 							+ stock.getId()
 							+ "et l'article référencé :"
-							+ stock.getReference());
+							+ stock.getComposant().getReference());
 			return message;
 		}
 
