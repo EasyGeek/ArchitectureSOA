@@ -1,8 +1,11 @@
 package com.easygeek.entite;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -27,6 +30,8 @@ public class DetailsCommande implements java.io.Serializable {
 	}
 	
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "details_commande_id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
 	}

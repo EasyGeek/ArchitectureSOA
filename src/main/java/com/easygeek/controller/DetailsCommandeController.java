@@ -1,5 +1,7 @@
 package com.easygeek.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +20,8 @@ public class DetailsCommandeController {
 	public DetailsCommandeService detailsService = new DetailsCommandeService();
 	
 	@RequestMapping(value = "/{idCommande}", method = RequestMethod.GET)
-	public DetailsCommande getDetails(@PathVariable Integer idCommande) {
-		DetailsCommande details  = detailsService.getDetails(idCommande);
+	public List<DetailsCommande> getDetails(@PathVariable Integer idCommande) {
+		List<DetailsCommande> details  = detailsService.getDetails(idCommande);
 		
 
 		return details;
@@ -52,10 +54,12 @@ public class DetailsCommandeController {
 	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
 	public String supperimerDetails(@PathVariable Integer id) {
 		String message;
-		DetailsCommande details = detailsService.getDetails(id);
+		List<DetailsCommande> details = detailsService.getDetails(id);
 		try {
-			
-			detailsService.delete(details);
+			for (DetailsCommande detailsCommande : details) {
+
+				detailsService.delete(detailsCommande);
+			}
 			message = "Le détail a été supprimé avec succés.";
 		} catch (Exception e) {
 			message = "Erreur de suppression";

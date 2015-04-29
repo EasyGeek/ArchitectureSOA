@@ -1,5 +1,7 @@
 package com.easygeek.service;
 
+import java.util.List;
+
 import org.hibernate.criterion.Restrictions;
 
 import com.easygeek.dao.CoreDao;
@@ -12,22 +14,10 @@ public class DetailsCommandeService extends CoreDao<DetailsCommande> {
 		super(DetailsCommande.class);
 	}
 
-	public DetailsCommande getDetails(Integer idCommande){
-		return (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("commande.commandeId",idCommande)).uniqueResult();
+	@SuppressWarnings("unchecked")
+	public List<DetailsCommande> getDetails(Integer idCommande){
+		return (List<DetailsCommande>) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("commande.commandeId",idCommande)).list();
 				
-	}
-	
-	public Composant getCommandeDetailsComposants(Integer idCommande){
-	/*	Criteria criteria = session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id.commandeId", idCommande));
-		criteria.setFetchMode("Commande",FetchMode.JOIN);
-		criteria.add(Restrictions.eq("commandeId", idCommande));
-		
-		return (DetailsCommande) criteria.uniqueResult();*/
-		
-		DetailsCommande detail = (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id.commandeId",idCommande)).uniqueResult();
-		
-		return (Composant) session.createCriteria(Composant.class).add(Restrictions.eq("reference",detail.getComposant())).uniqueResult();
-		
 	}
 	
 }
