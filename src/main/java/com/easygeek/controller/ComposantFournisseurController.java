@@ -1,7 +1,5 @@
 package com.easygeek.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,37 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.easygeek.entite.ComposantFournisseur;
 import com.easygeek.service.ComposantFournisseurService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/composantfournisseur")
 public class ComposantFournisseurController {
     public ComposantFournisseurService composantFournisseurService = new ComposantFournisseurService();
 
-    /***
-     * Affiche la liste de tous les fournisseurs
-     * http://localhost:8080/fournisseur
-     ***/
-    @RequestMapping(method = RequestMethod.GET)
-    public List<ComposantFournisseur> composantFournisseurs() {
-        List<ComposantFournisseur> composantFournisseurs = composantFournisseurService.getAll();
-        System.out.println("getAllComposantFournisseur");
-        return composantFournisseurs;
+    @RequestMapping(value = "/{idFournisseur}", method = RequestMethod.GET)
+    public List<ComposantFournisseur> getComposantFournisseur(@PathVariable Integer idFournisseur) {
+        List<ComposantFournisseur> details  = composantFournisseurService.getDetails(idFournisseur);
+
+        return details;
     }
 
-    /***
-     * Affiche un fournisseur en passant son id en GET au path variable :
-     * http://localhost:8080/fournisseur/id
-     ***/
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ComposantFournisseur getComposantFournisseur(@PathVariable Integer id) {
-        ComposantFournisseur fournisseur = composantFournisseurService.get(id);
-        System.out.println("getFournisseur avec l'id : " + id);
-        return fournisseur;
-    }
-
-    /***
-     * Ajoute un fournisseur en passant un json contenant l'objet en POST
-     * http://localhost:8080/fournisseur/ajouter
-     ***/
     @RequestMapping(value = "/ajouter", method = RequestMethod.POST)
     public ResponseEntity<ComposantFournisseur> ajoutComposantFournisseur(@RequestBody ComposantFournisseur composantFournisseur) {
         try {
@@ -57,10 +38,6 @@ public class ComposantFournisseurController {
         return new ResponseEntity<ComposantFournisseur>(composantFournisseur, HttpStatus.OK);
     }
 
-    /***
-     * Modifie un fournisseur en envoyant en post les champs à modifier et en
-     * get l'id de l'utilisateur http://localhost:8080/fournisseur/modifier/{id}
-     ***/
     @RequestMapping(value = "/modifier", method = RequestMethod.POST)
     public ResponseEntity<ComposantFournisseur> modifierComposantFournisseur(@RequestBody ComposantFournisseur composantFournisseur) {
         try {
@@ -74,10 +51,6 @@ public class ComposantFournisseurController {
         return new ResponseEntity<ComposantFournisseur>(composantFournisseur, HttpStatus.OK);
     }
 
-    /***
-     * Suppression d'un fournisseur en envoyant en DELETE le champ id
-     * http://localhost:8080/fournisseur/supprimer
-     ***/
     @RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
     public String supprimerComposantFournisseur(@PathVariable Integer id) {
         String message;
