@@ -36,6 +36,12 @@ public class PanierService extends CoreDao<Commande>{
 		return list;
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public List<Commande> getCommandesClient(Integer idClient){
+		return (List<Commande>) session.createCriteria(Commande.class).add(Restrictions.eq("client.clientId",idClient)).list();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<DetailsCommande> getDetailsByCommande(Integer idCommande){
 		Criteria criteria =  session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id", idCommande));

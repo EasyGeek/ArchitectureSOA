@@ -36,8 +36,7 @@ public class Client implements java.io.Serializable {
 	private String ville;
 	private String email;
 	private String password;
-	@JsonManagedReference
-	private Set<Commande> commandes = new HashSet<Commande>(0);
+	
 
 	public Client() {
 	}
@@ -48,8 +47,7 @@ public class Client implements java.io.Serializable {
 	}
 
 	public Client(String nom, String prenom, String telephone, String adresse,
-			String codePostal, String ville, String email, String password,
-			Set<Commande> commandes) {
+			String codePostal, String ville, String email, String password) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
@@ -58,7 +56,7 @@ public class Client implements java.io.Serializable {
 		this.ville = ville;
 		this.email = email;
 		this.password = password;
-		this.commandes = commandes;
+
 	}
 
 	@Id
@@ -144,13 +142,5 @@ public class Client implements java.io.Serializable {
 		this.password = password;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-	public Set<Commande> getCommandes() {
-		return this.commandes;
-	}
-
-	public void setCommandes(Set<Commande> commandes) {
-		this.commandes = commandes;
-	}
 
 }

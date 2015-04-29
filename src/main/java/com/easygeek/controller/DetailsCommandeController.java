@@ -69,7 +69,7 @@ public class DetailsCommandeController {
 	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
 	public String supperimerDetails(@PathVariable Integer id) {
 		String message;
-		List<DetailsCommande> details = detailsService.getDetails(id);
+		List<DetailsCommande> details = detailsService.getDetailsCom(id);
 		try {
 			for (DetailsCommande detailsCommande : details) {
 
