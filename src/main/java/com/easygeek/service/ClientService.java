@@ -16,6 +16,7 @@ public class ClientService extends CoreDao<Client> {
 		super(Client.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean connexion(String email, String password) {
 		Criteria query = session.createCriteria(Client.class)
 				.add(Restrictions.eq("email", email))
@@ -29,6 +30,7 @@ public class ClientService extends CoreDao<Client> {
 			return false;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Boolean verifEmailNotExist(Client client, String action) {
 		Criteria query = session.createCriteria(Client.class)
 				.add(Restrictions.eq("email", client.getEmail()));

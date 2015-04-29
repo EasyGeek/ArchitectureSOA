@@ -13,7 +13,8 @@ public class DetailsCommandeService extends CoreDao<DetailsCommande> {
 	}
 
 	public DetailsCommande getDetails(Integer idCommande){
-		return (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id.commandeId",idCommande)).uniqueResult();
+		return (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("commande.commandeId",idCommande)).uniqueResult();
+				
 	}
 	
 	public Composant getCommandeDetailsComposants(Integer idCommande){
@@ -25,7 +26,7 @@ public class DetailsCommandeService extends CoreDao<DetailsCommande> {
 		
 		DetailsCommande detail = (DetailsCommande) session.createCriteria(DetailsCommande.class).add(Restrictions.eq("id.commandeId",idCommande)).uniqueResult();
 		
-		return (Composant) session.createCriteria(Composant.class).add(Restrictions.eq("reference",detail.getReference())).uniqueResult();
+		return (Composant) session.createCriteria(Composant.class).add(Restrictions.eq("reference",detail.getComposant())).uniqueResult();
 		
 	}
 	
