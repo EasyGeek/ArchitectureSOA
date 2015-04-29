@@ -24,6 +24,12 @@ public class CatalogueController {
 		return composants;
 	}
 	
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	public Composant getComposants(@PathVariable  String id) {
+		Composant composants = catalogueService.getComposant(id);
+		return composants;
+	}
+	
 	@RequestMapping(value = "/type",  method = RequestMethod.GET)
 	public List<Type> getAllType() {
 		List<Type> types = catalogueService.getAllType();

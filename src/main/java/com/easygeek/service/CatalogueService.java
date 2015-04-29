@@ -17,6 +17,10 @@ public class CatalogueService extends CoreDao<Composant>{
 		super(Composant.class);
 	}
 	
+	public Composant getComposant(String id){
+		return (Composant) session.createCriteria(Composant.class).add(Restrictions.eq("reference",id)).uniqueResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Composant> getAllComposantByMarque(Integer idMarque){
 		return session.createCriteria(Composant.class).add(Restrictions.eq("marqueId.marqueId",idMarque)).list();
