@@ -66,9 +66,10 @@ public class PanierController {
 	/***
 	 * Suppression d'une commande
 	 */
-	@RequestMapping(value = "/supprimer",  method = RequestMethod.DELETE)
-	public String supprimerCommande(@RequestBody Commande commande) {
+	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.DELETE)
+	public String supprimerCommande(@PathVariable Integer id) {
 		String message = "";
+		Commande commande = panierService.get(id);
 		try {
 			panierService.delete(commande);
 			message = "Commande supprimée avec succès";
