@@ -18,9 +18,16 @@ import java.util.List;
 public class ComposantFournisseurController {
     public ComposantFournisseurService composantFournisseurService = new ComposantFournisseurService();
 
-    @RequestMapping(value = "/{idFournisseur}", method = RequestMethod.GET)
-    public List<ComposantFournisseur> getComposantFournisseur(@PathVariable Integer idFournisseur) {
-        List<ComposantFournisseur> details  = composantFournisseurService.getDetails(idFournisseur);
+    @RequestMapping(value = "/fournisseur/{idFournisseur}", method = RequestMethod.GET)
+    public List<ComposantFournisseur> getComposantsByFournisseur(@PathVariable Integer idFournisseur) {
+        List<ComposantFournisseur> details  = composantFournisseurService.getListComposanstByFournisseur(idFournisseur);
+
+        return details;
+    }
+
+    @RequestMapping(value = "/composant/{idComposant}", method = RequestMethod.GET)
+    public List<ComposantFournisseur> getFournisseursByComposant(@PathVariable String idComposant) {
+        List<ComposantFournisseur> details  = composantFournisseurService.getListFournisseursByComposant(idComposant);
 
         return details;
     }

@@ -14,7 +14,12 @@ public class ComposantFournisseurService extends CoreDao<ComposantFournisseur> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<ComposantFournisseur> getDetails(Integer idFournisseur){
+    public List<ComposantFournisseur> getListComposanstByFournisseur(Integer idFournisseur){
         return (List<ComposantFournisseur>) session.createCriteria(ComposantFournisseur.class).add(Restrictions.eq("fournisseur.fournisseurId", idFournisseur)).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<ComposantFournisseur> getListFournisseursByComposant(String idComposant){
+        return (List<ComposantFournisseur>) session.createCriteria(ComposantFournisseur.class).add(Restrictions.eq("composant.reference", idComposant)).list();
     }
 }
