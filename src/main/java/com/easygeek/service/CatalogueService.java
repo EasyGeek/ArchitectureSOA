@@ -2,12 +2,10 @@ package com.easygeek.service;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 import com.easygeek.dao.CoreDao;
-import com.easygeek.entite.Client;
 import com.easygeek.entite.Composant;
 import com.easygeek.entite.Marque;
 import com.easygeek.entite.Type;

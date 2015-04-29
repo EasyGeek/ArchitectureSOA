@@ -11,7 +11,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 import com.easygeek.dao.CoreDao;
-import com.easygeek.entite.Client;
 import com.easygeek.entite.Commande;
 import com.easygeek.entite.DetailsCommande;
 

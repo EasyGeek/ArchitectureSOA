@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.easygeek.entite.Commande;
-import com.easygeek.entite.Fournisseur;
 import com.easygeek.service.PanierService;
 
 @RestController

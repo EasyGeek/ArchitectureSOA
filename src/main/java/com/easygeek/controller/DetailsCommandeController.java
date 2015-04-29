@@ -1,7 +1,5 @@
 package com.easygeek.controller;
 
-import java.util.Date;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.easygeek.entite.Commande;
 import com.easygeek.entite.Composant;
 import com.easygeek.entite.DetailsCommande;
 import com.easygeek.service.DetailsCommandeService;
-import com.easygeek.service.PanierService;
 
 @RestController
 @RequestMapping("/detailscommande")

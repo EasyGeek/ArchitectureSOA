@@ -1,8 +1,5 @@
 package com.easygeek.service;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.easygeek.dao.CoreDao;
