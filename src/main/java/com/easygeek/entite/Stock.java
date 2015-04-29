@@ -5,10 +5,13 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,32 +23,14 @@ import javax.persistence.TemporalType;
 @Table(name = "Stock", catalog = "easygeek")
 public class Stock implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	private Integer idStock;
 	private String reference;
 	private Date dateStock;
 	private Boolean reapprovisionnement;
 	private Integer quantite;
-	private Integer fournisseurId;
-	
-
-	public Stock() {
-	}
-
-	public Stock(Integer idStock) {
-		this.idStock = idStock;
-	}
-
-	public Stock(Integer idStock, Date dateStock, Boolean reapprovisionnement,
-			Integer quantite) {
-		this.idStock = idStock;
-		this.dateStock = dateStock;
-		this.reapprovisionnement = reapprovisionnement;
-		this.quantite = quantite;
-	}
+	private Fournisseur fournisseurId;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -58,15 +43,6 @@ public class Stock implements java.io.Serializable {
 		this.idStock = idStock;
 	}
 	
-	@Column(name = "Fournisseur_id",nullable = false)
-	public Integer getFournisseurId() {
-		return fournisseurId;
-	}
-
-	public void setFournisseurId(Integer fournisseurId) {
-		this.fournisseurId = fournisseurId;
-	}
-
 	@Column(name = "reference", nullable = false)
 	public String getReference() {
 		return this.reference;
@@ -103,5 +79,25 @@ public class Stock implements java.io.Serializable {
 	public void setQuantite(Integer quantite) {
 		this.quantite = quantite;
 	}
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="Fournisseur_id")
+	public Fournisseur getFournisseurId() {
+		return fournisseurId;
+	}
+
+	public void setFournisseurId(Fournisseur fournisseurId) {
+		this.fournisseurId = fournisseurId;
+	}
+	
+//	@Column(name = "Fournisseur_id",nullable = false)
+//	public Integer getFournisseurId() {
+//		return fournisseurId;
+//	}
+//
+//	public void setFournisseurId(Integer fournisseurId) {
+//		this.fournisseurId = fournisseurId;
+//	}
+
 
 }
