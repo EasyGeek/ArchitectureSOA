@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
 import com.easygeek.dao.CoreDao;
-import com.easygeek.entite.Composant;
 import com.easygeek.entite.DetailsCommande;
 
 public class DetailsCommandeService extends CoreDao<DetailsCommande> {
