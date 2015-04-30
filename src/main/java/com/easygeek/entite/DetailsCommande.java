@@ -13,27 +13,25 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "details_commande", uniqueConstraints = @UniqueConstraint(columnNames = {"reference", "commande_id" }))
+@Table(name = "details_commande", uniqueConstraints = @UniqueConstraint(columnNames = {
+		"reference", "commande_id" }))
 public class DetailsCommande implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Float quantite;
 	private Composant composant;
 	private Commande commande;
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "details_commande_id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "quantite", precision = 12, scale = 0)
@@ -44,9 +42,9 @@ public class DetailsCommande implements java.io.Serializable {
 	public void setQuantite(Float quantite) {
 		this.quantite = quantite;
 	}
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="reference")
+	@JoinColumn(name = "reference")
 	public Composant getComposant() {
 		return this.composant;
 	}
@@ -56,7 +54,7 @@ public class DetailsCommande implements java.io.Serializable {
 	}
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="commande_id")
+	@JoinColumn(name = "commande_id")
 	public Commande getCommande() {
 		return this.commande;
 	}
